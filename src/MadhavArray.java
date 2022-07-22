@@ -6,38 +6,33 @@
  */
 public class MadhavArray {
 
-    static int getIndexN(int size) {
-        int n = 0;
-        for (int index = (size / 2) + 1; index >= 0; index--) {
-            if (size == ((index * (index + 1)) / 2)) {
-                n = index;
-                break;
-            }
-        }
-        return n;
-    }
-
     static int getSumByRange(int start, int end, int[] a) {
         int sum = 0;
-        for (int index = start; index < (end+start); index++) {
+        for (int index = start; index < end; index++) {
             sum += a[index];
         }
         return sum;
     }
 
     static int isMadhavArray(int[] a) {
-        int n = getIndexN(a.length);
-        if (n == 0) return 0;
-        System.out.println(n);
+        if (a.length == 0) return 0;
         int valueEquals = a[0];
         int stateMadhav = 1;
-        int previousStart = 0;
-        for (int index = 1; index <= n; index++) {
-            if (valueEquals != getSumByRange(previousStart, index, a)) {
+        int currentCounter = 1;
+        int previusIndex = 0;
+        for (int index = 1; index <= a.length; ) {
+            if (valueEquals != getSumByRange(previusIndex, index, a)) {
                 stateMadhav = 0;
                 break;
             }
-            previousStart += index;
+            currentCounter++;
+            previusIndex = index;
+            index = currentCounter * (currentCounter + 1) / 2;
+
+            if (index > a.length && previusIndex != a.length) {
+                stateMadhav = 0;
+                break;
+            }
         }
         return stateMadhav;
     }
@@ -73,10 +68,9 @@ public class MadhavArray {
                 "Result: " + isMadhavArray(new int[]{1})
         );
 
-
     }
     /*
-     System.out.println(
+      System.out.println(
                 "Result: " + isMadhavArray(new int[]{2, 1, 1})
         );
         System.out.println(
@@ -88,12 +82,21 @@ public class MadhavArray {
         System.out.println(
                 "Result: " + isMadhavArray(new int[]{18, 9, 10, 6, 6, 6})
         );
-//
+        System.out.println(
+                "Result: " + isMadhavArray(new int[]{-6, -3, -3, 8, -5, -4})
+        );
         System.out.println(
                 "Result: " + isMadhavArray(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, -2, -1})
         );
         System.out.println(
                 "Result: " + isMadhavArray(new int[]{3, 1, 2, 3, 0})
+        );
+
+        System.out.println(
+                "Result: " + isMadhavArray(new int[]{})
+        );
+        System.out.println(
+                "Result: " + isMadhavArray(new int[]{1})
         );
      */
 }
