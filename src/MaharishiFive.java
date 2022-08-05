@@ -57,11 +57,40 @@ public class MaharishiFive {
         }
         return onConvertListTo(arrayInt);
     }
+    static int[] a5(int[] first, int[] second)
+    {
+        if (first == null || second == null) return null;
+        if (first.length == 0 || second.length == 0) return new int[0];
+        int min =
+                (first.length < second.length) ? first.length : second.length;
+        int[] a, b;
+        if (min == first.length)
+        {
+            a = first;
+            b = second;
+        }
+        else
+        {
+            a = second;
+            b = first;
+        }
+        int[] c = new int[min];
+        int k = 0;
+        for (int value : a)
+            for (int i : b)
+                if (value == i) {
+                    c[k] = value;
+                    k++;
+                }
+        int[] retArray = new int[k];
+        System.arraycopy(c, 0, retArray, 0, retArray.length);
+        return retArray;
+    }
 
     public static void main(String[] args) {
         for (int index = 0; index < dataTest.size(); index++)
             System.out.println(
-                    "Number result " + index + " : " + Arrays.toString(f(dataTest.get(index), dataTest2.get(index)))
+                    "Number result " + index + " : " + Arrays.toString(a5(dataTest.get(index), dataTest2.get(index)))
             );
     }
 }
