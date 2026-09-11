@@ -8,11 +8,13 @@ import java.util.HashMap;
  */
 public class IsSequentiallyBounded {
     static int isSequentiallyBounded(int[] a) {
+
         if (a.length == 0) return 1;
         HashMap<Integer, Integer> numbers = new HashMap<>();
         int isSequentially = 1;
         int previousNumber= a[0];
         for (int index: a){
+            numbers.containsKey()
             numbers.put(index, numbers.getOrDefault(index,0));
             if(numbers.getOrDefault(index,0)>=index || previousNumber > index){
                 isSequentially = 0;
